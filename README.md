@@ -136,72 +136,63 @@ socketsExtends.py    Configuración de WebSockets
 
 ## ChatBOT (Simple BETA)
 
-- `GET /api/chatbot/medicamentos-disponibles` - Get medications within the chatbot
-- `GET /api/chatbot/mensaje` - send message to bot
-
 **Config .env**: Add .env la GEMINI_API_KEY y GEMINI_API_URL para usar el LLM de gemini 
 
-## API
+### API Routes
 
-### User Routes (`/api/users`)
-- `GET /api/users` - Get all users
-- `GET /api/users/<id>` - Get a user by ID
-- `POST /api/users` - Create a new user
-- `PUT /api/users/<id>` - Update a user
-- `DELETE /api/users/<id>` - Delete a user
-- `POST /api/users/login` - User authentication (generates a JWT token)
-- `POST /api/users/register` - Register a new user
-- `GET /api/me` - Get the currently authenticated user in the active session
-
-### Medicine Routes (`/api/medicamentos`)
-- `GET /api/medicamentos` - Get all medicines
-- `GET /api/medicamentos/<id>` - Get a medicine by ID
-- `POST /api/medicamentos` - Create a new medicine
-- `PUT /api/medicamentos/<id>` - Update a medicine
-- `DELETE /api/medicamentos/<id>` - Delete a medicine
-- `GET /api/medicamentos/search` - Search medicines by name or description
-
-### Availability Routes (`/api/disponibilidad`)
-- `GET /api/disponibilidad` - Get all availability records
-- `GET /api/disponibilidad/<id>` - Get an availability record by ID
-- `POST /api/disponibilidad` - Create a new availability record
-- `PUT /api/disponibilidad/<id>` - Update an availability record
-- `DELETE /api/disponibilidad/<id>` - Delete an availability record
-
-### Collection Routes (`/api/recolecciones`)
-- `GET /api/recolecciones` - Get all collections
-- `GET /api/recolecciones/<id>` - Get a collection by ID
-- `POST /api/recolecciones` - Create a new collection
-- `PUT /api/recolecciones/<id>` - Update a collection
-- `DELETE /api/recolecciones/<id>` - Delete a collection
-
-### Favorites Routes (`/api/favoritos`)
-- `GET /api/favoritos/user/<user_id>` - Get a user's favorites
-- `POST /api/favoritos` - Add a medicine to favorites
-- `DELETE /api/favoritos/<id>` - Remove a favorite
-
-## Administration Panel
-
-The administration panel is built with Jinja2 templates and provides a web interface to manage every aspect of the system.
+| Módulo / Module | Método | Endpoint | Descripción / Description |
+| :--- | :---: | :--- | :--- |
+| **ChatBot** | `GET` | `/api/chatbot/medicamentos-disponibles` | Get medications within the chatbot |
+| **ChatBot** | `GET` | `/api/chatbot/mensaje` | Send message to bot |
+| **Users** | `GET` | `/api/users` | Get all users |
+| **Users** | `GET` | `/api/users/<id>` | Get a user by ID |
+| **Users** | `POST` | `/api/users` | Create a new user |
+| **Users** | `PUT` | `/api/users/<id>` | Update a user |
+| **Users** | `DELETE` | `/api/users/<id>` | Delete a user |
+| **Users** | `POST` | `/api/users/login` | User authentication (generates a JWT token) |
+| **Users** | `POST` | `/api/users/register` | Register a new user |
+| **Users** | `GET` | `/api/me` | Get the currently authenticated user in the active session |
+| **Medicines** | `GET` | `/api/medicamentos` | Get all medicines |
+| **Medicines** | `GET` | `/api/medicamentos/<id>` | Get a medicine by ID |
+| **Medicines** | `POST` | `/api/medicamentos` | Create a new medicine |
+| **Medicines** | `PUT` | `/api/medicamentos/<id>` | Update a medicine |
+| **Medicines** | `DELETE` | `/api/medicamentos/<id>` | Delete a medicine |
+| **Medicines** | `GET` | `/api/medicamentos/search` | Search medicines by name or description |
+| **Availability**| `GET` | `/api/disponibilidad` | Get all availability records |
+| **Availability**| `GET` | `/api/disponibilidad/<id>` | Get an availability record by ID |
+| **Availability**| `POST` | `/api/disponibilidad` | Create a new availability record |
+| **Availability**| `PUT` | `/api/disponibilidad/<id>` | Update an availability record |
+| **Availability**| `DELETE` | `/api/disponibilidad/<id>` | Delete an availability record |
+| **Collections** | `GET` | `/api/recolecciones` | Get all collections |
+| **Collections** | `GET` | `/api/recolecciones/<id>` | Get a collection by ID |
+| **Collections** | `POST` | `/api/recolecciones` | Create a new collection |
+| **Collections** | `PUT` | `/api/recolecciones/<id>` | Update a collection |
+| **Collections** | `DELETE` | `/api/recolecciones/<id>` | Delete a collection |
+| **Favorites** | `GET` | `/api/favoritos/user/<user_id>` | Get a user's favorites |
+| **Favorites** | `POST` | `/api/favoritos` | Add a medicine to favorites |
+| **Favorites** | `DELETE` | `/api/favoritos/<id>` | Remove a favorite |
 
 ### Administration Panel Routes
-- `/` - Main dashboard
-- `/login` - Administrator login
-- `/medicamentos` - Medicine management
-- `/medicamentos/add` - Add a new medicine
-- `/medicamentos/edit/<id>` - Edit a medicine
-- `/medicamentos/view/<id>` - View medicine details
-- `/disponibilidad` - Availability management
-- `/disponibilidad/add` - Add a new availability record
-- `/disponibilidad/edit/<id>` - Edit availability
-- `/recolecciones` - Collection management
-- `/recolecciones/edit/<id>` - Edit a collection
-- `/sedes` - Branch management
-- `/sedes/add` - Add a new branch
-- `/sedes/edit/<id>` - Edit a branch
-- `/users` - User management
-- `/users/add` - Add a new user
-- `/users/edit/<id>` - Edit a user
+
+| Área / Area | Endpoint | Descripción / Description |
+| :--- | :--- | :--- |
+| **Dashboard** | `/` | Main dashboard |
+| **Auth** | `/login` | Administrator login |
+| **Medicines** | `/medicamentos` | Medicine management |
+| **Medicines** | `/medicamentos/add` | Add a new medicine |
+| **Medicines** | `/medicamentos/edit/<id>` | Edit a medicine |
+| **Medicines** | `/medicamentos/view/<id>` | View medicine details |
+| **Availability**| `/disponibilidad` | Availability management |
+| **Availability**| `/disponibilidad/add` | Add a new availability record |
+| **Availability**| `/disponibilidad/edit/<id>` | Edit availability |
+| **Collections** | `/recolecciones` | Collection management |
+| **Collections** | `/recolecciones/edit/<id>` | Edit a collection |
+| **Branches** | `/sedes` | Branch management |
+| **Branches** | `/sedes/add` | Add a new branch |
+| **Branches** | `/sedes/edit/<id>` | Edit a branch |
+| **Users** | `/users` | User management |
+| **Users** | `/users/add` | Add a new user |
+| **Users** | `/users/edit/<id>` | Edit a user |
 
 ## Security
 
