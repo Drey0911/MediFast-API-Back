@@ -136,7 +136,7 @@ socketsExtends.py    Configuración de WebSockets
 
 ## ChatBOT (Simple BETA)
 
-**Config .env**: Add .env la GEMINI_API_KEY y GEMINI_API_URL para usar el LLM de gemini 
+**Config add .env**: GEMINI_API_KEY and GEMINI_API_URL to use Gemini LLM
 
 ### API Routes
 
