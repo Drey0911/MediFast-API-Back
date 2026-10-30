@@ -134,6 +134,117 @@ socketsExtends.py    Configuración de WebSockets
 > [!TIP]
 > To test with the mobile app locally, expose the port with `ngrok http 8000` and paste the URL into the frontend's `config/apiBase.ts`.
 
+## ChatBOT (Simple BETA)
+
+- `GET /api/chatbot/medicamentos-disponibles` - Get medications within the chatbot
+- `GET /api/chatbot/mensaje` - send message to bot
+
+**Config .env**: Add .env la GEMINI_API_KEY y GEMINI_API_URL para usar el LLM de gemini 
+
+## API
+
+### User Routes (`/api/users`)
+- `GET /api/users` - Get all users
+- `GET /api/users/<id>` - Get a user by ID
+- `POST /api/users` - Create a new user
+- `PUT /api/users/<id>` - Update a user
+- `DELETE /api/users/<id>` - Delete a user
+- `POST /api/users/login` - User authentication (generates a JWT token)
+- `POST /api/users/register` - Register a new user
+- `GET /api/me` - Get the currently authenticated user in the active session
+
+### Medicine Routes (`/api/medicamentos`)
+- `GET /api/medicamentos` - Get all medicines
+- `GET /api/medicamentos/<id>` - Get a medicine by ID
+- `POST /api/medicamentos` - Create a new medicine
+- `PUT /api/medicamentos/<id>` - Update a medicine
+- `DELETE /api/medicamentos/<id>` - Delete a medicine
+- `GET /api/medicamentos/search` - Search medicines by name or description
+
+### Availability Routes (`/api/disponibilidad`)
+- `GET /api/disponibilidad` - Get all availability records
+- `GET /api/disponibilidad/<id>` - Get an availability record by ID
+- `POST /api/disponibilidad` - Create a new availability record
+- `PUT /api/disponibilidad/<id>` - Update an availability record
+- `DELETE /api/disponibilidad/<id>` - Delete an availability record
+
+### Collection Routes (`/api/recolecciones`)
+- `GET /api/recolecciones` - Get all collections
+- `GET /api/recolecciones/<id>` - Get a collection by ID
+- `POST /api/recolecciones` - Create a new collection
+- `PUT /api/recolecciones/<id>` - Update a collection
+- `DELETE /api/recolecciones/<id>` - Delete a collection
+
+### Favorites Routes (`/api/favoritos`)
+- `GET /api/favoritos/user/<user_id>` - Get a user's favorites
+- `POST /api/favoritos` - Add a medicine to favorites
+- `DELETE /api/favoritos/<id>` - Remove a favorite
+
+## Administration Panel
+
+The administration panel is built with Jinja2 templates and provides a web interface to manage every aspect of the system.
+
+### Administration Panel Routes
+- `/` - Main dashboard
+- `/login` - Administrator login
+- `/medicamentos` - Medicine management
+- `/medicamentos/add` - Add a new medicine
+- `/medicamentos/edit/<id>` - Edit a medicine
+- `/medicamentos/view/<id>` - View medicine details
+- `/disponibilidad` - Availability management
+- `/disponibilidad/add` - Add a new availability record
+- `/disponibilidad/edit/<id>` - Edit availability
+- `/recolecciones` - Collection management
+- `/recolecciones/edit/<id>` - Edit a collection
+- `/sedes` - Branch management
+- `/sedes/add` - Add a new branch
+- `/sedes/edit/<id>` - Edit a branch
+- `/users` - User management
+- `/users/add` - Add a new user
+- `/users/edit/<id>` - Edit a user
+
+## Security
+
+All API routes require JWT token authentication, except for login routes. The token must be included in the request header as `Authorization: Bearer <token>`. If you want to test it with Postman or another tool, you must first log in through `/api/login`.
+
+## WebSockets
+
+The system uses WebSockets to provide real-time updates on:
+- Changes in medicine availability
+- New collections
+- Updates to collection status
+- User updates or real-time modifications
+- Tasks and views in real time (medicines, collections, users, etc...)
+
+## Scheduled Services
+
+The system uses APScheduler to run scheduled tasks:
+- Daily reminder delivery for pending collections
+- Medicine stock monitoring
+- Automatic availability notifications
+
+## WhatsApp Integration
+
+The system integrates with the [WhatsApp Business API](https://developers.facebook.com/docs/whatsapp/api/overview) to send automatic notifications to users about:
+- Medicine availability
+- Collection reminders
+- Changes in collection status
+- Password changes
+
+( It is recommended to use the verified API in production, using templates for functionality. Currently, the test WhatsApp number is used and a message must be written beforehand for sending within the 24-hour window. This is only for development or prototype mode in a real environment; the verified WhatsApp Business API would be required.)
+
+## Default Administrator User
+
+To use the application correctly for testing, we provide a default user:
+
+DNI: 10101010
+Password: Admin.123456789
+
+In your local or deployed database engine, paste the following SQL statement in the SQL editor or creation section:
+
+INSERT INTO `usuarios` (`id`, `nombre`, `apellidos`, `dni`, `telefono`, `password`, `rol`) VALUES
+(1, 'MediFast', 'Dispensario', '10101010', '+573000000000', '$2b$12$8uNWOICxpZPmFb84U.8D9eGiGslHPHUd4aDT9.uvjTs9ZT1tBnvYG', 'admin');
+
 ---
 
 ## Licencia · License
